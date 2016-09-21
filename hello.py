@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__)
 
-COLOR = "#33CC33"
+COLOR = "#ffff00"
 
 # get CF environment variables
 port = int(os.getenv("PORT"))
