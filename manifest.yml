@@ -1,7 +1,6 @@
 ---
 applications:
-- name: cf-HelloWorld-username
+- name: cf-HelloWorld
   memory: 64M
   instances: 1
   buildpack: python_buildpack
-  domain: cfapps.io
