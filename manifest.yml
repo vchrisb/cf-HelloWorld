@@ -2,5 +2,5 @@
 applications:
 - name: cf-HelloWorld
   memory: 64M
-  instances: 1
-  buildpack: python_buildpack
+  instances: 2
+  buildpack: https://github.com/cloudfoundry/python-buildpack.git

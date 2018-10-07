@@ -13,3 +13,7 @@ A Hello World Cloud Foundry Example written with Python and the Flask Framework
   * if using Pivotal Web Services use `api.run.pivotal.io` as the target
 * Modify the application name in `manifest.yml` to be unique
 * push the application to Cloud Foundry with: `cf push`
+
+## Concourse
+
+This repo also contains a Concourse Pipeline.

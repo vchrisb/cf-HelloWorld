@@ -62,3 +62,9 @@ db.sqlite.db
 #Vagrant
 .vagrant
 .bundle
+
+#venv
+.venv
+
+#vendor
+vendor
