@@ -10,8 +10,8 @@ resources:
   type: cf
   source:
     api: ((cf-api))
-    username: ((cf-username))
-    password: ((cf-password))
+    username: ((cf-credentials.username))
+    password: ((cf-credentials.password))
     organization: ((cf-organization))
     space: ((cf-space))
     #skip_cert_check: true
