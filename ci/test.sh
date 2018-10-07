@@ -4,6 +4,8 @@ set -e -x
 
 cd source-code
 python -m venv ./.venv
+ls -l
+ls -l .venv/bin
 source .venv/bin/activate
 pip install -r requirements.txt
 pip install nose
