@@ -1,0 +1,39 @@
+---
+resources:
+- name: source-code
+  type: git
+  source:
+    uri: https://github.com/vchrisb/cf-HelloWorld.git
+    branch: master
+
+- name: cf
+  type: cf
+  source:
+    api: {{cf-api}}
+    username: {{cf-username}}
+    password: {{cf-password}}
+    organization: {{cf-organization}}
+    space: {{cf-space}}
+    #skip_cert_check: true
+
+jobs:
+- name: test
+  public: true
+  plan:
+  - get: source-code
+    trigger: true
+  - task: test
+    file: source-code/ci/test.yml
+- name: build
+  public: true
+  plan:
+  - get: source-code
+    trigger: true
+    passed: test
+  - task: build
+    file: source-code/ci/build.yml
+  - put: cf
+    params:
+      manifest: build-output/manifest.yml
+      path: build-output/
+      current_app_name: cf-HelloWorld
