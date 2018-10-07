@@ -4,16 +4,16 @@ resources:
   type: git
   source:
     uri: https://github.com/vchrisb/cf-HelloWorld.git
-    branch: master
+    branch: ci
 
 - name: cf
   type: cf
   source:
-    api: {{cf-api}}
-    username: {{cf-username}}
-    password: {{cf-password}}
-    organization: {{cf-organization}}
-    space: {{cf-space}}
+    api: ((cf-api))
+    username: ((cf-username))
+    password: ((cf-password))
+    organization: ((cf-organization))
+    space: ((cf-space))
     #skip_cert_check: true
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
   plan:
   - get: source-code
     trigger: true
-    passed: test
+    passed: [test]
   - task: build
     file: source-code/ci/build.yml
   - put: cf
