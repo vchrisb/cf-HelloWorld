@@ -8,6 +8,7 @@ from flask import Flask, render_template
 from flask_caching import Cache
 from flask_healthz import HealthError, healthz
 from markupsafe import Markup
+from psutil import Process
 
 app = Flask(__name__)
 app.register_blueprint(healthz, url_prefix="/healthz")
@@ -97,6 +98,23 @@ def fail_live():
         + "</strong>!"
     )
 
+    return render_template("index.html", bgcolor=RED, content=content)
+
+
+@app.route("/kill")
+def kill():
+    this_proc = Process(os.getpid())
+    parent = this_proc.parent()
+    if this_proc.name() != parent.name():
+        this_proc.terminate()
+    else:
+        parent.terminate()
+    
+    content = Markup(
+        "<h1>Shutting instance <strong>#"
+        + str(app_instance)
+        + " down!</h1>"
+    )
     return render_template("index.html", bgcolor=RED, content=content)
 
 
