@@ -11,24 +11,28 @@ A Hello World Cloud Foundry Example written with Python and the Flask Framework
 * Open a shell and change into the `cf-HelloWorld` folder
 * Login to Cloud Foundry: `cf login`
 * Modify the application name in `manifest.yml` to be unique
-* push the application to Cloud Foundry with: `cf push`
+* push the application to Cloud Foundry with: `cf push --strategy rolling`
 
 ## Inject failure
 
-Access `https://<app url>/fail/ready` to fail readiness for a random instance for one minute, or fail a specific app:
+Access `https://<app url>/fail/ready` to fail readiness for a random instance for one minute, or for a specific app:
 
 ```
-curl https://<app url>/fail -X POST "X-Cf-App-Instance":"APP-GUID:INSTANCE-INDEX-NUMBER"
+curl https://<app url>/fail/ready -X POST -H "X-Cf-App-Instance":"APP-GUID:INSTANCE-INDEX-NUMBER"
 ```
 
-To fail liveness access `https://<app url>/fail/live`
+To fail liveness access `https://<app url>/fail/live` or for a specific app:
+
+```
+curl https://<app url>/fail/live -X POST -H "X-Cf-App-Instance":"APP-GUID:INSTANCE-INDEX-NUMBER"
+```
 
 ## Kill
 
 Access `https://<app url>/kll` to kill a random instance, or kill a specific app:
 
 ```
-curl https://<app url>/kill -X POST "X-Cf-App-Instance":"APP-GUID:INSTANCE-INDEX-NUMBER"
+curl https://<app url>/kill -X POST -H"X-Cf-App-Instance":"APP-GUID:INSTANCE-INDEX-NUMBER"
 ```
 
 ## Concourse
