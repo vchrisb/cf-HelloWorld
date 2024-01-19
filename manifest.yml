@@ -8,3 +8,5 @@ applications:
   health-check-http-endpoint: /healthz/live
   readiness-health-check-type: http
   readiness-health-check-http-endpoint: /healthz/ready
+  env:
+    GIT_SHA: ((GIT_SHA))

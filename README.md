@@ -11,7 +11,7 @@ A Hello World Cloud Foundry Example written with Python and the Flask Framework
 * Open a shell and change into the `cf-HelloWorld` folder
 * Login to Cloud Foundry: `cf login`
 * Modify the application name in `manifest.yml` to be unique
-* push the application to Cloud Foundry with: `cf push --strategy rolling`
+* push the application to Cloud Foundry with: `cf push --strategy rolling --var GIT_SHA=(git rev-parse HEAD)`
 
 ## Inject failure
 
