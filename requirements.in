@@ -1,0 +1,4 @@
+Flask
+flask-healthz
+flask-caching
+gunicorn

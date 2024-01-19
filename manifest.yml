@@ -1,6 +1,10 @@
 ---
 applications:
-- name: cf-HelloWorld
+- name: helloworld
   memory: 64M
   instances: 2
-  buildpack: https://github.com/cloudfoundry/python-buildpack.git
+  buildpack: python_buildpack
+  health-check-type: http
+  health-check-http-endpoint: /healthz/live
+  readiness-health-check-type: http
+  readiness-health-check-http-endpoint: /healthz/ready

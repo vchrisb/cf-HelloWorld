@@ -68,3 +68,9 @@ db.sqlite.db
 
 #vendor
 vendor
+
+#cache directory
+cache
+
+# visual studio code
+.vscode

@@ -14,6 +14,17 @@ A Hello World Cloud Foundry Example written with Python and the Flask Framework
 * Modify the application name in `manifest.yml` to be unique
 * push the application to Cloud Foundry with: `cf push`
 
+
+## Inject failure
+
+Access `https://<app url>/fail/ready` to fail readiness for a random instance for one minute, or access fail a specific app:
+
+```
+curl https://<app url>/fail -X POST "X-Cf-App-Instance":"APP-GUID:INSTANCE-INDEX-NUMBER"
+```
+
+To fail liveness access `https://<app url>/fail/live`
+
 ## Concourse
 
 This repo also contains a Concourse Pipeline.
