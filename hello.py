@@ -1,8 +1,8 @@
 """Cloud Foundry test"""
 import json
-import os
-import time
 from datetime import datetime, timedelta
+from os import getenv, getpid
+from time import sleep
 
 from flask import Flask, render_template
 from flask_caching import Cache
@@ -18,8 +18,7 @@ ORANGE = "#FFA500"
 RED = "#FF0000"
 
 config = {
-    "DEBUG": os.getenv("DEBUG", default="False")
-    == "True",  # some Flask specific configs
+    "DEBUG": getenv("DEBUG", default="False") == "True",  # some Flask specific configs
     "CACHE_TYPE": "FileSystemCache",  # Flask-Caching related configs
     "CACHE_DEFAULT_TIMEOUT": 300,
     "CACHE_DIR": "cache",
@@ -33,11 +32,11 @@ app.config.from_mapping(config)
 cache = Cache(app)
 
 # get CF environment variables
-port = int(os.getenv("PORT", default=8080))
+port = int(getenv("PORT", default=8080))
 
 default_vcap_application = '{"instance_index": 0, "application_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "application_name": "helloworld-local"}'
 VCAP_APPLICATION = json.loads(
-    os.getenv("VCAP_APPLICATION", default=default_vcap_application)
+    getenv("VCAP_APPLICATION", default=default_vcap_application)
 )
 
 app_instance = int(VCAP_APPLICATION["instance_index"])
@@ -60,10 +59,10 @@ def hello_world():
     )
 
     if isinstance(fail_live, bool) and fail_live:
-        time.sleep(5)
+        sleep(5)
         COLOR = RED
     elif isinstance(fail_ready, datetime) and fail_ready > datetime.now():
-        time.sleep(1)
+        sleep(1)
         COLOR = ORANGE
     else:
         COLOR = GREEN
@@ -103,17 +102,15 @@ def fail_live():
 
 @app.route("/kill")
 def kill():
-    this_proc = Process(os.getpid())
+    this_proc = Process(getpid())
     parent = this_proc.parent()
     if this_proc.name() != parent.name():
         this_proc.terminate()
     else:
         parent.terminate()
-    
+
     content = Markup(
-        "<h1>Shutting instance <strong>#"
-        + str(app_instance)
-        + " down!</h1>"
+        "<h1>Shutting instance <strong>#" + str(app_instance) + " down!</h1>"
     )
     return render_template("index.html", bgcolor=RED, content=content)
 

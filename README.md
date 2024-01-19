@@ -21,7 +21,7 @@ Access `https://<app url>/fail/ready` to fail readiness for a random instance fo
 curl https://<app url>/fail/ready -X POST -H "X-Cf-App-Instance":"APP-GUID:INSTANCE-INDEX-NUMBER"
 ```
 
-To fail liveness access `https://<app url>/fail/live` or for a specific app:
+Access `https://<app url>/fail/live` to fail liveness or for a specific app:
 
 ```
 curl https://<app url>/fail/live -X POST -H "X-Cf-App-Instance":"APP-GUID:INSTANCE-INDEX-NUMBER"
