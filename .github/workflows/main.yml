@@ -20,12 +20,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: setup cf cli
-      uses: vchrisb/setup-cf@v0
+      uses: vchrisb/setup-cf@v0.0.3
       with:
         api: ${{ secrets.CF_API }}
         username: ${{ secrets.CF_USERNAME }}
         password: ${{ secrets.CF_PASSWORD }}
         org: test
         space: dev
+        command: push --strategy rolling --var GIT_SHA=${{ github.sha }}
     - name: access cloud foundry api
-      run: cf push --strategy rolling --var GIT_SHA=${{ github.sha }}
+      run: cf apps
