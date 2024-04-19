@@ -28,4 +28,4 @@ jobs:
         org: test
         space: dev
     - name: access cloud foundry api
-      run: cf push
+      run: cf push --strategy rolling --var GIT_SHA=${{ github.sha }}
