@@ -18,6 +18,7 @@ jobs:
     name: password
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
     - name: setup cf cli
       uses: vchrisb/setup-cf@v0
       with:
